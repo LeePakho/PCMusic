@@ -23,8 +23,11 @@
                         <i class="iconfont icon-playnum"></i><div>{{calculationNum(item.playCount)}}/{{item.trackCount}}首</div>
                     </div>
                 </div>
-                <div class="play-name">
-                    <span>{{linmitString(item.name,18)}}</span>
+                <div class="info">
+                    <div class="play-name">{{item.name}}</div>
+                    <div class="trags" v-if="item.tags">
+                        <span class="trag" v-for="(trag,index) in item.tags" :key="index">#{{trag}}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,7 +74,75 @@ export default {
 <style lang="less" scoped>
 
 .play{
-    
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    .item{
+        width: calc(100% / 6);
+        flex: calc(100% / 6);
+        padding: 0px 40px 20px 0px;
+        .play-image{
+            position: relative;
+            .el-image{
+                z-index: 3;
+                cursor: pointer;
+            }
+            .play-hear{
+                display: inline-flex;
+                gap: 10px;
+                font-size: 12px;
+                padding: 3% 5px ;
+                text-align: center;
+                color: white;
+                gap: 10px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                background: linear-gradient(to right,rgba(0, 0, 0,0) 10%,rgba(0,0,0,.2) 20%,rgba(0,0,0,.5) 100%);
+                i{
+                    color: white;
+                }
+            }
+            &::after,&::before{
+                content: "";
+                position: absolute;
+                right: 0;
+                width: 100%;
+                background: #909090;
+            }
+            &::after{
+                top: 10%;
+                transform: translateX(5px);
+                height: 80%;
+                opacity: .4;
+            }
+            &::before{
+                top: 20%;
+                transform: translateX(10px);
+                height: 60%;
+                opacity: .2;
+            }
+            &:hover{
+                &::after,&::before{
+                    background: #ff641e;
+                }
+            }
+        }
+        .info{
+            .play-name{
+                font-size: 16px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                padding: 5% 0 ;
+            }
+            .trags{
+                display: flex;
+                color: #ff641e;
+                gap: 3%;
+            }
+        }
+    }
 }
 
 /** 
