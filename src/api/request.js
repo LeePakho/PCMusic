@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL:'http://www.xxxx/',
+    baseURL:'http://www.xxxx',
     timeout: 1000 * 5,
     withCredentials:false,
     validateStatus: function (status) {

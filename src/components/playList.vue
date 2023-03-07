@@ -71,6 +71,11 @@ export default {
 <style lang="less" scoped>
 
 .play{
+    
+}
+
+/** 
+.play{
     display: flex;
     flex-wrap: wrap;
     .item{
@@ -152,7 +157,7 @@ export default {
         }
     }
 }
-
+*/
 .el-skeleton{
     width: 100%;
     display: flex;
