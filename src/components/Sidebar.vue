@@ -7,10 +7,8 @@
                 <span>{{ item.name }}</span>
             </li>
         </ul>
-        <div class="address">
-            <p>githun地址</p>
-            <p></p>
-        </div>
+
+        <a class="address" href="https://github.com/LeePakho/PCMusic" target="_blank">githun地址</a>
     </div>
 </template>
 
@@ -97,5 +95,9 @@
         color: var(--color-text);
         vertical-align: top;
     }
+}
+.address{
+    color: var(--color-text-height);
+    text-decoration: none;
 }
 </style>
