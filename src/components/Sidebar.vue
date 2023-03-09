@@ -32,10 +32,12 @@
         }, {
             name: '歌手',
             path: 'artist'
-        }, {
-            name: '我的音乐',
-            path: 'my'
-        }])
+        }, 
+        // {
+        //     name: '我的音乐',
+        //     path: 'my'
+        // }
+        ])
     //计算当前路径
     const route = useRoute()
     let menuActive = computed(()=> route.path)

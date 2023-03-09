@@ -19,7 +19,7 @@
             <div class="hot">
                 <div class="item" v-for="item in playList" :key="item.id">
                     <div class="image">
-                        <router-link :to="{path:'sheet',query:{id:item.id}}">
+                        <router-link :to="{path:'playlist/detail',query:{id:item.id}}">
                             <el-image :src="item.coverImgUrl"></el-image>
                         </router-link>
                         <span class="num">

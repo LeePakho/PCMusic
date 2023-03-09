@@ -60,7 +60,7 @@ export default {
         }
 
         const jumpSheet = id =>{
-            router.push({path:'/sheet',query:{id}})
+            router.push({path:'/playlist/detail',query:{id}})
         }
         return{
             jumpSheet,
