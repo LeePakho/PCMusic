@@ -78,7 +78,7 @@ export default {
     flex-wrap: wrap;
     flex-direction: row;
     .item{
-        width: calc(100% / 6);
+        max-width: calc(100% / 6 - 40px);
         flex: calc(100% / 6);
         padding: 0px 40px 20px 0px;
         .play-image{
@@ -145,90 +145,6 @@ export default {
     }
 }
 
-/** 
-.play{
-    display: flex;
-    flex-wrap: wrap;
-    .item{
-        flex: 16%;
-        width: auto;
-        height: 200px;
-        max-width: calc(100% / 6 - 20px);
-        padding: 0px 20px 10px 0px;
-        .play-image{
-            display: block;
-            position: relative;
-            .el-image{
-                width: 150px;
-                height: 150px;
-                cursor: pointer;
-                border-radius: 12px;
-                z-index: 3;
-                transition: all .5s linear  ;
-            }
-            &::after,&::before{
-                position: absolute;
-                display: block;
-                content: '';
-                width: 100%;
-                height: 100%;
-                background-color: #d9d9d9;
-                top: 0;
-                transition: all .5s linear  ;
-            }
-            &::after{
-                right: -14px;
-                transform: scale(0.8);
-                z-index: 1;
-            }
-            &::before{
-                right: -25px;
-                transform: scale(0.7);
-                z-index: 2;
-            }
-
-            &:hover{
-                &::after, &::before {
-                    background: #ff960080;
-                }
-                &::after{
-                    right: -22px;
-                }
-                &::before{
-                    right: -33px;
-                }
-                .el-image{
-                    transform: scale(1.1);
-                }
-                .play-hear{
-                    transform: scale(1);
-                }
-            }
-
-        }
-        .play-name{
-            font-size: 90%;
-            color: var(--color-text-main);
-        }
-        .play-hear{
-            width: 100%;
-            display: flex;
-            position: absolute;
-            transform: scale(0.8);
-            top: 0;
-            justify-content: right;
-            z-index: 3;
-            color: #fff;
-            background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 97%,rgba(0,0,0,0.5) 100%);
-            transition: all .5s linear  ;
-            i{
-                color: #fff;
-                margin: 4px 4px 0 0;
-            }
-        }
-    }
-}
-*/
 .el-skeleton{
     width: 100%;
     display: flex;
