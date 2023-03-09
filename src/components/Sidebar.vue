@@ -48,6 +48,7 @@
 
 <style lang="less" scoped>
 .side-main {
+    position: fixed;
     padding: 0;
     text-align: center;
 }

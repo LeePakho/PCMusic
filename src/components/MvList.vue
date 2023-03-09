@@ -15,16 +15,16 @@
         </div>
       </template>
       <template #default>
-        <div class="mv">
+        <div class="mvlist">
             <div class="item" v-for="item in mvList" :key="item.id">
-                <div class="mv-image" @click="jumpMv(item.id)">
+                <div class="mvlist-image" @click="jumpMv(item.id)">
                     <i class="iconfont icon-video-play"></i>
-                    <el-image :src="item.cover" lazy @click="jumpMv(item.id)"></el-image>
+                    <el-image :src="item.cover" @click="jumpMv(item.id)"></el-image>
                 </div>
-                <div class="mv-info">
-                    <div class="name">{{linmitByte(item.name,30)}}</div>
+                <div class="mvlist-info">
+                    <div class="name">{{item.name}}</div>
                     <div class="artistName">{{item.artistName}}</div>
-                    <div class="duration"><i class="iconfont icon-mvlist"></i><span class="duration-num">{{calculation(item.playCount)}}</span></div>
+                    <div class="duration"><i class="iconfont icon-mvlist"></i>{{$utils.calculationNum(item.playCount)}}</div>
                 </div>
             </div>
         </div>
@@ -33,26 +33,16 @@
 </template>
 
 <script>
-import { getCurrentInstance } from '@vue/runtime-core'
 import { useRouter } from 'vue-router'
 export default {
     props:{
         mvList:Array
     },setup(){
-        const {proxy} = getCurrentInstance()
         const router = useRouter()
-        const calculation = num =>{
-            return proxy.$utils.calculationNum(num)
-        }
-        const linmitByte =(str,num)=>{
-            return proxy.$utils.linmitByte(str,num)
-        }
         const jumpMv = id=>{
             router.push({path:'/mv',query:{id}})
         }
         return{
-            calculation,
-            linmitByte,
             jumpMv,
         }
     }
@@ -61,6 +51,94 @@ export default {
 
 <style lang="less" scoped>
 
+.mvlist{
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+    .item{
+        flex: calc(100% / 6);
+        max-width: calc(100% / 6 - 20px);
+        margin: 10px 10px 0;
+        border-radius: 4px;
+
+    }
+
+    .mvlist-image{
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 123px;
+        overflow: hidden;
+        &:hover{
+            
+            .icon-video-play{
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            .el-image{
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    .icon-video-play{
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 3;
+        margin-top: -30px;
+        font-size: 60px;
+        text-align: center;
+        color: #fff;
+        opacity: 0;
+        transform: scale(.5);
+        transition: all .4s linear;
+        text-shadow: 2px 2px 10px #000;
+    }
+
+    .el-image{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        z-index: 2;
+        transition: all .4s linear;
+    }
+
+    .mvlist-info{
+        position: relative;
+        font-size: 14px;
+        padding: 15px 0;
+
+        .name{
+            display: block;
+            height: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .artistName,.duration{
+            display: block;
+            height: 20px;
+            color: #909090;
+        }
+
+        .icon-mvlist{
+            margin-right: 3px;
+        }
+    }
+}
+
+
+/** 
 .mv{
     display: flex;
     flex-wrap: wrap;
@@ -81,7 +159,6 @@ export default {
             .el-image{
                 transition: all .5s linear;
                 -webkit-transition: all .5s linear;
-                // z-index: 2;
             }
             i{
                 color: #fff;
@@ -126,7 +203,7 @@ export default {
         }
     }
 }
-
+*/
 .el-skeleton{
     width: 100%;
     display: flex;

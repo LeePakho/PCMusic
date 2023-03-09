@@ -56,15 +56,15 @@ import { ref } from 'vue'
 export default {
   components: { SongsList },
   props:{
-    flex:{
+    flex:{  //设置容器大小
         type:Number,
         default:0,
     },
-    list:{
+    list:{  //歌曲数据
         type:Array,
         default:new Array
     },
-    playlist:{
+    playlist:{  //歌单数据
         type:Array,
         default:new Array
     },
