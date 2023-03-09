@@ -5,11 +5,14 @@ const routes = [
     {path:'/index',name:'index',component:()=>import('@/view/index')},
     {path:'/sheet',name:'sheet',component:()=>import('@/view/sheet')},
     {path:'/rank',name:'rank',component:()=>import('@/view/rank')},
-    {path:'/playlist',name:'play',component:()=>import('@/view/play')},
+    {path:'/playlist',name:'playlist',component:()=>import('@/view/play')},
+    {path:'/playlist/detail',name:'playlistdetail',component:()=>import('@/view/play/detail')},
     {path:'/mvlist',name:'mvlist',component:()=>import('@/view/mvlist')},
+    {path:'/mvlist/mv',name:'mv',component:()=>import('@/view/mvlist/mv')},
     {path:'/artist',name:'artist',component:()=>import('@/view/artist')},
-    {path:'/my',name:'my',component:()=>import('@/view/my')},
     {path:'/cloudsearch',name:'cloudsearch',component:()=>import('@/view/cloudsearch')},
+    // {path:'/my',name:'my',component:()=>import('@/view/my')},
+    
 ]
 
 

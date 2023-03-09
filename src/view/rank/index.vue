@@ -1,53 +1,11 @@
 <template>
   <div class="rank">
-    <div class="rank-container">
-      <div class="rank-header">
-        <el-image class="rank-image" :src="playlist.coverImgUrl"></el-image>
-        <div class="rank-info">
-          <div class="title">
-            <span class="rank-title">{{ playlist.name }}</span>
-            <span class="updatetime">( {{ $utils.formartDate(playlist.updateTime,'MM月dd日') }} 更新 )</span>
-          </div>
-          <div class="time" v-if="playlist.creator">
-            <el-image class="time-image" :src="playlist.creator.avatarUrl"></el-image>
-            <span class="rank-name">{{ playlist.creator.nickname }}</span>
-            <span class="rank-time">{{ $utils.formartDate(playlist.createTime,'yyyy-MM-dd') }}</span>
-          </div>
-          <div class="rank-digital">
-            <span class="rank-playCount"><i class="iconfont icon-playnum"></i> {{ calculationNum(playlist.playCount) }}次</span>
-            <span class="rank-collect"><i class="iconfont icon-collect"></i> {{ calculationNum(playlist.subscribedCount) }}</span>
-            <span class="rank-comment"><i class="iconfont icon-comment"></i> {{ calculationNum(playlist.commentCount) }}</span>
-          </div>
-          <div class="rank-desc">
-            <div class="desc">歌单简介</div>
-            <div class="desc-text">{{ playlist.description }}</div>
-          </div>
-        </div>
-      </div>
-      <div class="rank-main">
-        <div class="rank-song">
-          <div class="song-title">
-            <span class="rank-song-title">歌曲列表</span>
-            <span class="rank-song-count">{{total}}首歌</span>
-          </div>
-          <div class="song-but">
-            <el-button round  @click="wholePlay()"><i class="iconfont icon-audio-play"></i> 播放全部</el-button>
-            <el-button round><i class="iconfont icon-collect"></i> 收藏</el-button>
-          </div>
-        </div>
-        <songs-list :limit="20" :offset="page - 1" :songList="list.slice((page - 1) * limit , page * limit)"></songs-list>
-        <div>
-          <el-pagination
-              :page-size="limit"
-              @current-change='currentChange'
-              :pager-count="5"
-              :curren-page='page'
-              layout="prev, pager, next"
-              :total="total"
-            />
-        </div>
-      </div>
-    </div>
+    <detail 
+      :flex="7" 
+      :playlist="playlist" 
+      :list="list" 
+      :total="total"
+    ></detail>
     <div class="rank-aside">
       <div class="aside-menu">
         <span :class="type === 'Top' ? 'active' : ''" @click="changeType('Top')"><em>TOP榜</em></span>
@@ -68,16 +26,13 @@
 </template>
 
 <script>
-import SongsList from '@/components/SongsList'
+import Detail from '@/components/detall.vue'
 import { reactive, toRefs } from '@vue/reactivity'
 import { getCurrentInstance, onMounted, watch } from '@vue/runtime-core'
-import { useStore } from 'vuex'
 export default {
-  components: { SongsList },
+  components: { Detail },
   setup(){
     const { proxy } = getCurrentInstance()
-
-    const store = useStore()
 
     const info = reactive({
       listTop:[],//top榜
@@ -110,16 +65,6 @@ export default {
 
     const formatTime = time =>{
       return proxy.$utils.formatMsgTime(time)
-    }
-
-    const calculationNum = num =>{
-      return proxy.$utils.calculationNum(num)
-    }
-
-    const wholePlay = ()=>{
-      store.commit("setPlayList",info.list)
-      store.commit("setPlayIndex",0)
-      store.commit("setIsPlay",true)
     }
 
     const getList = async ()=>{
@@ -170,10 +115,6 @@ export default {
       info.rid = info[`list${info.type}`][info.listIndex].id
     }
 
-    const currentChange = page=>{
-      info.page = page
-    }
-
     watch(()=>info.rid,()=>getList())
 
     onMounted(()=>{
@@ -186,9 +127,6 @@ export default {
       changeType,
       changeIndex,
       formatTime,
-      calculationNum,
-      currentChange,
-      wholePlay,
     }
   }
 }
@@ -197,11 +135,7 @@ export default {
 <style lang="less" scoped>
 
   .rank{
-    // width: 70%;
     display: flex;
-    .rank-container{
-      flex: 7;
-    }
 
     .rank-aside{
       flex: 3;
@@ -272,110 +206,6 @@ export default {
 
           &.acitve{
             background-image: linear-gradient(110deg,#fff 20%,#ff641e 100%);
-          }
-        }
-      }
-    }
-
-    .rank-header{
-      display: flex;
-      flex-direction: row;
-      margin-bottom: 40px;
-
-      .rank-image{
-        flex: 3;
-        border-radius: 10px;
-      }
-
-      .rank-info{
-        flex: 9;
-        margin-left: 20px;
-        background-color: #fff;
-        border-radius: 10px;
-        padding: 30px 20px 20px 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        .title{
-          .rank-title{
-            color: var(--color-text-main);
-            font-size: 25px;
-            font-weight: 400;
-          }
-
-          .updatetime{
-            margin-left: 10px;
-            color: var(--color-text);
-            font-size: 80%;
-          }
-        }
-
-        .time{
-          display: flex;
-          justify-content: left;
-          align-items: center;
-          gap: 20px;
-          font-size: 90%;
-
-          .time-image{
-            flex: 1;
-            border-radius: 50%;
-          }
-
-          .rank-name{
-            flex: 2;
-          }
-
-          .rank-time{
-            flex: 13;
-          }
-        }
-
-        .rank-digital{
-          .rank-collect,.rank-comment{
-            margin-left: 2%;
-          }
-        }
-
-        .rank-desc{
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          font-size: 90%;
-          .desc{
-            color: var(--color-text-main);
-          }
-          .desc-text{
-            color: var(--color-text);
-          }
-        }
-      }
-    }
-
-    .rank-main{
-      background-color: #fff;
-      border-radius: 10px;
-      padding: 40px 20px 20px 20px;
-
-      .rank-song{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        
-        .song-title{
-          display: flex;
-          flex-direction: row;
-          justify-content: left;
-          align-items: flex-end;
-          gap: 20px;
-          .rank-song-title{
-            color: var(--color-text-main);
-            font-size: 25px;
-          }
-          .rank-song-count{
-            font-size: 90%;
-            color: var(--color-text);
           }
         }
       }
