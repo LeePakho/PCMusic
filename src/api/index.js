@@ -124,10 +124,6 @@ const topListDetail = ()=>{
 const relatedPlaylist = ({id})=>{
     return api.get(`/related/playlist?id=${id}`)
 }
-//歌单评论
-const commentPlaylist = ({id,limit=20,offset=0,before=0})=>{
-    return api.get(`/comment/playlist?id=${id}&limit=${limit}&offset=${offset}&before=${before}`)
-}
 //获取专辑内容
 const album = ({id})=>{
     return api.get(`/album?id=${id}`)
@@ -135,6 +131,38 @@ const album = ({id})=>{
 //获取歌手专辑
 const artistAlbum = ({id,limit=30,offset=0})=>{
     return api.get(`/artist/album?id=${id}&limit=${limit}&offset=${offset}`)
+}
+//专辑评论
+//before: 分页参数,取上一页最后一项的 time 获取下一页数据(获取超过 5000 条评论的时候需要用到)
+const commentAlbum = ({id,limit=20,offset=0,before})=>{
+    return api.get(`/comment/album?id=${id}&limit=${limit}&offset=${offset}&before=${before}`)
+}
+//歌单评论
+const commentPlaylist = ({id,limit=20,offset=0,before=0})=>{
+    return api.get(`/comment/playlist?id=${id}&limit=${limit}&offset=${offset}&before=${before}`)
+}
+//MV评论
+const commentMv = ({id,limit=20,offset=0,before=0})=>{
+    return api.get(`/comment/mv?id=${id}&limit=${limit}&offset=${offset}&before=${before}`)
+}
+//歌曲评论
+const commentMusic = ({id,limit=20,offset=0,before=0})=>{
+    return api.get(`/comment/music?id=${id}&limit=${limit}&offset=${offset}&before=${before}`)
+}
+//视频评论
+const commentVideo = ({id,limit=20,offset=0,before=0})=>{
+    return api.get(`/comment/video?id=${id}&limit=${limit}&offset=${offset}&before=${before}`)
+}
+/**
+//发送/删除评论
+t:1 发送, 2 回复 0 删除
+type:   0: 歌曲 1: mv   2: 歌单 3: 专辑 4: 电台 5: 视频 6: 动态
+id:对应资源 id
+content :要发送的内容
+commentId :回复的评论 id (回复评论时必填)
+ */
+const comment = ({t,type,id,content,commentId})=>{
+    return api.get(`/comment?t=${t}&type=${type}&id=${id}&content=${content}&commentId=${commentId}`)
 }
 export{
     Phonelogoin,
@@ -171,4 +199,9 @@ export{
     commentPlaylist,
     album,
     artistAlbum,
+    commentAlbum,
+    commentMv,
+    commentMusic,
+    commentVideo,
+    comment,
 }

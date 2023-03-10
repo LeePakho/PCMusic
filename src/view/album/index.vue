@@ -17,7 +17,7 @@
                     {{ index>0? "/"+artist.name : artist.name }}
                 </span>
             </div>
-            <div class="publishTime">发行时间：{{ $utils.formartDate(album.publishTime,"yyyy-mm-dd") }}</div>
+            <div class="publishTime">发行时间：{{ $utils.formartDate(album.publishTime,"yyyy-MM-dd") }}</div>
             <div class="company">发行公司：{{ album.company }}</div>
           </div>
           <div class="descs">
@@ -59,7 +59,7 @@
           <el-image :src="item.picUrl"></el-image>
           <div class="info">
             <div class="name">{{ item.name }}</div>
-            <div class="time">{{ $utils.formartDate(item.publishTime,"yyyy-mm-dd") }}</div>
+            <div class="time">{{ $utils.formartDate(item.publishTime,"yyyy-MM-dd") }}</div>
           </div>
         </router-link>
     </div>
@@ -214,6 +214,7 @@ export default {
       background-color: #fff;
       border-radius: 10px;
       padding: 40px 20px 20px 20px;
+      margin-bottom: 30px;
 
       .song{
         display: flex;
