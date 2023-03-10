@@ -128,6 +128,14 @@ const relatedPlaylist = ({id})=>{
 const commentPlaylist = ({id,limit=20,offset=0,before=0})=>{
     return api.get(`/comment/playlist?id=${id}&limit=${limit}&offset=${offset}&before=${before}`)
 }
+//获取专辑内容
+const album = ({id})=>{
+    return api.get(`/album?id=${id}`)
+}
+//获取歌手专辑
+const artistAlbum = ({id,limit=30,offset=0})=>{
+    return api.get(`/artist/album?id=${id}&limit=${limit}&offset=${offset}`)
+}
 export{
     Phonelogoin,
     searchHot,
@@ -161,4 +169,6 @@ export{
     artistList,
     relatedPlaylist,
     commentPlaylist,
+    album,
+    artistAlbum,
 }

@@ -1,5 +1,5 @@
 <template>
-  <el-carousel :interval="5000" arrow='never' indicator-position="outside">
+  <el-carousel :interval="5000" arrow='never' indicator-position="outside" height="360px">
     <el-carousel-item class="box" v-for="(list,index) in info.lists" :key="index">
       <router-link class="item" :to="{path:'/singer',query:{id:item.id}}" v-for="item in list" :key="item.id">
         <el-image :src="item.picUrl"></el-image>
@@ -45,22 +45,20 @@ import { getCurrentInstance, onMounted, reactive } from 'vue'
 </script>
 
 <style lang="less" scoped>
-    .box{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-content: space-between;
-        padding: 0;
-        .item{
-            flex: 25%;
-            max-width: calc(100% / 4 - 10px);
-            .el-image{
-                border-radius: 10px;
-            }
+
+.box{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    padding: 0;
+    .item{
+        flex: 25%;
+        max-width: calc(100% / 4 - 10px);
+        .el-image{
+            border-radius: 10px;
         }
     }
-.el-carousel{
-    margin-bottom: 0;
 }
 </style>

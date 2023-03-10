@@ -11,6 +11,7 @@ const routes = [
     {path:'/mvlist/mv',name:'mv',component:()=>import('@/view/mvlist/mv')},
     {path:'/artist',name:'artist',component:()=>import('@/view/artist')},
     {path:'/cloudsearch',name:'cloudsearch',component:()=>import('@/view/cloudsearch')},
+    {path:'/album',name:'album',component:()=>import('@/view/album')},
     // {path:'/my',name:'my',component:()=>import('@/view/my')},
     
 ]
