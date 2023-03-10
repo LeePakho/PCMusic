@@ -69,12 +69,8 @@ const topAlbum = (area) =>{
     return api.get(`/top/album?area=${area}`)
 }
 //所以榜单
-const topList = (() =>{
-    return ()=> api.get('/toplist')
-})()
-//获取歌单详情
-const playlistDetail = ({id})=>{
-    return api.get(`/playlist/detail?id=${id}`)
+const topList = () =>{
+    return api.get('/toplist')
 }
 //歌单 ( 网友精选碟 )
 //order: 可选值为 'new' 和 'hot', 分别对应最新和最热 , 默认为 'hot'
@@ -120,6 +116,18 @@ const topListDetail = ()=>{
  const artistList = ({ limit, offset, initial, type, area })=>{
     return api.get(`/artist/list?type=${type}&area=${area}&initial=${initial}&limit=${limit}&offset=${offset}`)
  }
+ //获取歌单详情
+ const playlistDetail = ({id})=>{
+     return api.get(`/playlist/detail?id=${id}`)
+ }
+ //相关歌单推荐
+const relatedPlaylist = ({id})=>{
+    return api.get(`/related/playlist?id=${id}`)
+}
+//歌单评论
+const commentPlaylist = ({id,limit=20,offset=0,before=0})=>{
+    return api.get(`/comment/playlist?id=${id}&limit=${limit}&offset=${offset}&before=${before}`)
+}
 export{
     Phonelogoin,
     searchHot,
@@ -151,4 +159,6 @@ export{
     playlistCatlist,
     mv,
     artistList,
+    relatedPlaylist,
+    commentPlaylist,
 }

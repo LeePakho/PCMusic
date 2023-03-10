@@ -35,7 +35,10 @@
           </div>
         </div>
         <songs-list :limit="limit" :offset="page - 1" :songList="list.slice((page - 1) * limit , page * limit)"></songs-list>
-        <div>
+
+        <div class="PlayLogin" v-if="isPlayLogin" @click="onpeLogin">登录后查看全部歌曲</div>
+
+        <div v-if="total>limit">
           <el-pagination
               :page-size="limit"
               @current-change='currentChange'
@@ -52,7 +55,8 @@
 <script>
 import SongsList from '@/components/SongsList'
 import { useStore } from 'vuex'
-import { ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 export default {
   components: { SongsList },
   props:{
@@ -80,18 +84,41 @@ export default {
   setup(props){
     const page = ref(1)
     const store = useStore()
+    const route = useRoute()
+    
+    const isPlayLogin = computed(()=>{
+      if(route.fullPath.indexOf("playlist") >= 0){
+        if(!store.getters.isLogin){
+          return true
+        }
+      }
+      return false
+    })
+    
+    const onpeLogin = ()=>{
+      store.commit('setloginDialog',true)
+    }
+
+    onMounted(()=>{
+      console.log()
+    })
+    
     const currentChange = pageIndex=>{
       page.value =  pageIndex
     }
+    
     const wholePlay = ()=>{
       store.commit("setPlayList",props.list)
       store.commit("setPlayIndex",0)
       store.commit("setIsPlay",true)
     }
+
     return{
         page,
+        isPlayLogin,
         currentChange,
-        wholePlay
+        wholePlay,
+        onpeLogin,
     }
   }
 
@@ -202,6 +229,29 @@ export default {
           }
         }
       }
+    }
+
+    .desc-text{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+
+    }
+
+    .PlayLogin{
+      display: block;
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      background: #ff641e;
+      color: #fff;
+      font-size: 14px;
+      border-radius: 50px;
+      cursor: pointer;
     }
 
 </style>

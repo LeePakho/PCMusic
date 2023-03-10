@@ -108,6 +108,12 @@ export default{
 
 <style lang="less" scoped>
 
+.song-text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .song-box{
     margin: 10px 0px;
     color: rgb(110, 105, 105);

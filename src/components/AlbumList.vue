@@ -65,6 +65,7 @@ export default {
         border-radius: 4px;
         background: #f0f0f0;
         overflow: hidden;
+        cursor: pointer;
         .album-img{
             flex: 2;
             border-radius: 4px;
