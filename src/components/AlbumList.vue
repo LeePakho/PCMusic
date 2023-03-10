@@ -12,7 +12,7 @@
       </template>
       <template #default>
         <div class="album">
-            <div class="item" v-for="(item,index) in albumList" :key="index" @click="jumpAlbum(item)">
+            <div class="item" v-for="(item,index) in albumList" :key="index" @click="jumpAlbum(item.albumId)">
                 <div class="album-img">
                     <el-image :src="item.picUrl" lazy></el-image>
                 </div>
@@ -35,10 +35,8 @@ export default {
     },
     setup(){
         const router = useRouter()
-        const jumpAlbum = (item)=>{
-            router.push({path:'/album',query:{
-                id:item.id
-            }})
+        const jumpAlbum = (id)=>{
+            router.push({path:'/album',query:{id}})
         }
         return{
             jumpAlbum

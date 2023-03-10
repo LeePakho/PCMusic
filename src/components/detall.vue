@@ -55,7 +55,7 @@
 <script>
 import SongsList from '@/components/SongsList'
 import { useStore } from 'vuex'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 export default {
   components: { SongsList },
@@ -98,10 +98,6 @@ export default {
     const onpeLogin = ()=>{
       store.commit('setloginDialog',true)
     }
-
-    onMounted(()=>{
-      console.log()
-    })
     
     const currentChange = pageIndex=>{
       page.value =  pageIndex
@@ -189,9 +185,6 @@ export default {
         }
 
         .descs{
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
           font-size: 90%;
           .desc{
             color: var(--color-text-main);
@@ -238,7 +231,7 @@ export default {
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-
+      color: var(--color-text);
     }
 
     .PlayLogin{
