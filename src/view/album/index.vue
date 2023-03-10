@@ -50,6 +50,7 @@
             />
         </div>
       </div>
+      <comments :type="type" :id="id"></comments>
     </div>
 
     <div class="side">
@@ -67,10 +68,11 @@
 
 <script>
 import SongsList from '@/components/SongsList'
+import Comments from '@/components/Comments'
 import { useRoute } from 'vue-router'
 import { getCurrentInstance, onMounted, reactive, toRefs } from 'vue'
 export default {
-    components:{SongsList},
+    components:{ SongsList , Comments },
     setup(){
         const { proxy } = getCurrentInstance()
         const route = useRoute()
@@ -83,6 +85,7 @@ export default {
             limit:15,
             page:1,
             total:0,
+            type: 3, // 0: 歌曲 1: mv 2: 歌单 3: 专辑  4: 视频
         })
 
 
