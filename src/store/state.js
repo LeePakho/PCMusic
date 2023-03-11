@@ -5,4 +5,5 @@ export default{
     isPlay:false,//是否播放
     playList:[],//播放列表
     playIndex:0,//播放列表下表
+    playinfo:{},//播放信息
 }

@@ -14,9 +14,11 @@ export default{
     setPlayList(state,val){
         state.playList = val
         window.localStorage.setItem('playList',JSON.stringify(val))
+        state.playinfo = state.playList[state.playIndex]
     },
     setPlayIndex(state,val){
         state.playIndex = val
+        state.playinfo = state.playList[state.playIndex]
     },
     removeList(state,index){
         let playIndex = state.playIndex
@@ -26,5 +28,6 @@ export default{
         }else if(index == playIndex){
             state.isPlay = false
         }
+        state.playinfo = state.playList[state.playIndex]
     }
 }

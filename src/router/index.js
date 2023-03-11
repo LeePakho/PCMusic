@@ -12,6 +12,7 @@ const routes = [
     {path:'/artist',name:'artist',component:()=>import('@/view/artist')},
     {path:'/cloudsearch',name:'cloudsearch',component:()=>import('@/view/cloudsearch')},
     {path:'/album',name:'album',component:()=>import('@/view/album')},
+    {path:'/song',name:'song',component:()=>import('@/view/song')},
     // {path:'/my',name:'my',component:()=>import('@/view/my')},
     
 ]

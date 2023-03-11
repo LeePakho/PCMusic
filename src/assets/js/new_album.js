@@ -17,11 +17,13 @@ export default function new_album (){
         if(res.code !== 200){
             return proxy.$msg.error = "请求失败"
         }
-        if(area === 'ALL'){
-            new_album_info.albumList = res.weekData.splice(0,12)
-        }else{
-            new_album_info.albumList = res.monthData.splice(0,12)
-        }
+        // if(area === 'ALL'){
+        //     new_album_info.albumList = res.weekData.splice(0,12)
+        // }else{
+        //     new_album_info.albumList = res.monthData.splice(0,12)
+        // }
+
+        new_album_info.albumList = res.monthData.splice(0,12)
         new_album_info.albumList = new_album_info.albumList && new_album_info.albumList.map(item=>{
             return {
                 name:proxy.$utils.getStringByte(item.name)>10? item.name.substring(0,4)+'...' : item.name,

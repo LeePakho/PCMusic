@@ -256,6 +256,7 @@ export default {
             border-radius: 0;
             box-shadow: none;
             overflow: hidden;
+            border-radius: 10px !important;
         }
     }
     .box-but{

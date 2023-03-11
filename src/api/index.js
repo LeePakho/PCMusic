@@ -164,6 +164,36 @@ commentId :回复的评论 id (回复评论时必填)
 const comment = ({t,type,id,content,commentId})=>{
     return api.get(`/comment?t=${t}&type=${type}&id=${id}&content=${content}&commentId=${commentId}`)
 }
+//获取歌曲详情
+const songDetail = ({ids}) =>{
+    return api.get(`/song/detail?ids=${ids}`)
+}
+//获取歌词
+const lyric = ({id}) =>{
+    return api.get(`/lyric?id=${id}`)
+}
+//获取逐字歌词
+const lyricNew = ({id}) =>{
+    return api.get(`/lyric?id=${id}`)
+}
+///获取相似歌单
+//歌曲id
+const simiPlaylist = ({id})=>{
+    return api.get(`/simi/playlist?id=${id}`)
+}
+//获取相似歌手
+//歌手id
+const simiArtist = ({id})=>{
+    return api.get(`/simi/artist?id=${id}`)
+}
+//相似 mv
+const simiMv = ({id})=>{
+    return api.get(`/simi/mv?mvid=${id}`)
+}
+//获取相似音乐
+const simiSong = ({id})=>{
+    return api.get(`/simi/song?id=${id}`)
+}
 export{
     Phonelogoin,
     searchHot,
@@ -204,4 +234,11 @@ export{
     commentMusic,
     commentVideo,
     comment,
+    songDetail,
+    lyric,
+    lyricNew,
+    simiPlaylist,
+    simiArtist,
+    simiMv,
+    simiSong,
 }

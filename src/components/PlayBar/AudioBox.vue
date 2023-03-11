@@ -13,10 +13,12 @@
 </template>
 
 <script>
-import { computed, nextTick, reactive, ref, watch } from "vue"
+import { computed, getCurrentInstance, nextTick, onBeforeMount, reactive, ref, watch } from "vue"
 import { useStore } from "vuex"
 export default{
     setup(props,{emit}){
+        
+        const { proxy } = getCurrentInstance()
         const store = useStore()
         const isPlay = computed(()=>store.getters.isPlay)
         const playList = computed(()=>store.getters.playList)
@@ -30,11 +32,12 @@ export default{
             initAudioReady:false,
             playMode:0,// 播放模式  0循环播放、1单曲循环、2随机播放
         })
-
+        
         const timeupdate = ()=>{
             let $myAudio = myAudio.value
             const currentTime = $myAudio.currentTime
             const duration = $myAudio.duration
+            proxy.$bus.emit("sendcurrentTime",currentTime)
             emit("setProgressWidth",currentTime/duration)
             emit("changeCurrent",currentTime)
         }
@@ -139,6 +142,10 @@ export default{
 
         watch(volume,n=>{
             emit("changeVolumeProgressWidth",n)
+        })
+
+        onBeforeMount(()=>{
+            store.commit("setIsPlay",false)
         })
 
         return{
