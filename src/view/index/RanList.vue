@@ -197,8 +197,5 @@ import { useRouter } from "vue-router"
         }
     }
 
-@keyframes name {
-    
-}
 
 </style>

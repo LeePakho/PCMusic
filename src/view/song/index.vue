@@ -38,12 +38,12 @@
             </div>
         </div>
         <div class="song-content-right">
-            <div class="words-song" ref="words">
-                <ul class="words-scrol" >
-                    <li :class="['words-item',isacitve(index)]" v-for="(item,index) in info.lyric" :key="index">
+            <div class="words-song" ref="words" @mouseenter="wordsenter" @mouseleave="wordsleave">
+                <div class="words-scrol">
+                    <div :class="['words-item',isacitve(index)]" v-for="(item,index) in info.lyric" :key="index">
                         {{ item.str }}
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -74,8 +74,9 @@ import { useStore } from "vuex";
         lyric:[],
         othersongs:[],
         playlist:[],
-        currentTime :0,
-        wordindex:0,
+        currentTime:0,
+        isScroll:false,
+        offset: 0,
     })
 
     // 当前播放信息
@@ -98,7 +99,7 @@ import { useStore } from "vuex";
                 return --index
             }
         }
-        return info.lyric.length-1
+        return (+info.lyric.length - 2)
     })
 
     const isacitve = computed(()=>{
@@ -106,6 +107,8 @@ import { useStore } from "vuex";
             return wordindex.value == index && playinfo.value.id == info.id ? "acitve" : ""
         }
     })
+
+    const wordsheight = computed(()=>+(words.value.clientHeight / 2) )
 
     const plyaing = (song)=>{
         if(song.id == playinfo.value.id && store.getters.isPlay){
@@ -193,17 +196,47 @@ import { useStore } from "vuex";
     }
 
     const shiftwodr = ()=>{
-        let height = words.value.clientHeight
-        let liheight = words.value.firstElementChild.firstElementChild.clientHeight
-        let index =  Math.floor(height / liheight / 2)
-        if(wordindex.value > index && playinfo.value.id == info.id){
-            let laseindex = info.lyric.length - index - 1
-            let offset = (wordindex.value - index) * liheight
-            if(wordindex.value > laseindex){
-                return
-            }
-             return document.querySelector(".words-scrol").style.transform= `translateY(-${offset}px)`
+        if(info.isScroll){
+            return
         }
+        var offset = 0;
+        let scrollheight = words.value.firstElementChild.clientHeight
+        let childNodes = [...words.value.firstElementChild.childNodes]
+        childNodes.filter((node,index)=>(index<=wordindex.value)&&!isNaN(node.clientHeight)).map(item=>offset += item.clientHeight)
+        info.offset = offset
+        if(offset>wordsheight.value&&((scrollheight-offset)>wordsheight.value)){
+            return words.value.firstElementChild.style.transform= `translateY(-${offset - wordsheight.value}px)`
+        }
+
+       /** 
+        let scrollheight = document.querySelector(".words-scrol").clientHeight
+        let child = words.value.firstElementChild.childNodes
+        for (let index = 0; index <= wordindex.value; index++) {
+            let childHeight = child[index].clientHeight
+            if(!isNaN(+childHeight) && scrollheight-offset>wordsheight.value){
+                offset += childHeight
+            }
+            console.log(offset)
+        }
+        info.offset = offset
+        if(offset>wordsheight.value){
+            return document.querySelector(".words-scrol").style.transform= `translateY(-${offset - wordsheight.value}px)`
+        } 
+        */
+    }
+
+    const wordsenter = ()=>{
+        info.isScroll = true
+        words.value.scrollTop = info.offset - wordsheight.value
+        words.value.firstElementChild.style.transition= '0s'
+        words.value.firstElementChild.style.transform= `translateY(0px)`
+    }
+
+    const wordsleave = ()=>{
+        info.isScroll = false
+        shiftwodr()
+        words.value.scrollTop = 0
+        words.value.firstElementChild.style.transition= '.3s'
     }
 
     let bus = proxy.$bus.on("sendcurrentTime",(currentTime)=>{
@@ -357,17 +390,16 @@ import { useStore } from "vuex";
 
 .words-song{
     height: 29rem;
-    overflow: hidden;
+    overflow-y: auto;
     .words-scrol{
-        height: 100%;
-        padding: 0;
         text-align: center;
         transform: translateY(0);
+        transition: .3s;
         .words-item{
             font-size: 16px;
             line-height: 30px;
             color: var(--color-text);
-            transform: all .3s inherit;
+            transition: .3s;
             &.acitve{
                 color: var(--color-text-main);
                 transform: scale(1.2);
