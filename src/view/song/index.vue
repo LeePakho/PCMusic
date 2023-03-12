@@ -207,22 +207,6 @@ import { useStore } from "vuex";
         if(offset>wordsheight.value&&((scrollheight-offset)>wordsheight.value)){
             return words.value.firstElementChild.style.transform= `translateY(-${offset - wordsheight.value}px)`
         }
-
-       /** 
-        let scrollheight = document.querySelector(".words-scrol").clientHeight
-        let child = words.value.firstElementChild.childNodes
-        for (let index = 0; index <= wordindex.value; index++) {
-            let childHeight = child[index].clientHeight
-            if(!isNaN(+childHeight) && scrollheight-offset>wordsheight.value){
-                offset += childHeight
-            }
-            console.log(offset)
-        }
-        info.offset = offset
-        if(offset>wordsheight.value){
-            return document.querySelector(".words-scrol").style.transform= `translateY(-${offset - wordsheight.value}px)`
-        } 
-        */
     }
 
     const wordsenter = ()=>{
