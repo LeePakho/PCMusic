@@ -3,7 +3,7 @@ import {createRouter,createWebHashHistory} from 'vue-router'
 const routes = [
     {path:'/',redirect:'/index'},
     {path:'/index',name:'index',component:()=>import('@/view/index')},
-    {path:'/sheet',name:'sheet',component:()=>import('@/view/sheet')},
+    {path:'/singer',name:'singer',component:()=>import('@/view/singer')},
     {path:'/rank',name:'rank',component:()=>import('@/view/rank')},
     {path:'/playlist',name:'playlist',component:()=>import('@/view/play')},
     {path:'/playlist/detail',name:'playlistdetail',component:()=>import('@/view/play/detail')},
@@ -13,7 +13,7 @@ const routes = [
     {path:'/cloudsearch',name:'cloudsearch',component:()=>import('@/view/cloudsearch')},
     {path:'/album',name:'album',component:()=>import('@/view/album')},
     {path:'/song',name:'song',component:()=>import('@/view/song')},
-    // {path:'/my',name:'my',component:()=>import('@/view/my')},
+    // {path:'/singer',name:'singer',component:()=>import('@/view/singer')},
     
 ]
 

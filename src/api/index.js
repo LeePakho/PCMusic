@@ -186,13 +186,21 @@ const simiPlaylist = ({id})=>{
 const simiArtist = ({id})=>{
     return api.get(`/simi/artist?id=${id}`)
 }
-//相似 mv
-const simiMv = ({id})=>{
-    return api.get(`/simi/mv?mvid=${id}`)
-}
 //获取相似音乐
 const simiSong = ({id})=>{
     return api.get(`/simi/song?id=${id}`)
+}
+//获取MV数据
+const mvDetail = ({id})=>{
+    return api.get(`/mv/detail?mvid=${id}`)
+}
+//mv地址    播放地址
+const mvUrl = ({id})=>{
+    return api.get(`/mv/url?id=${id}`)
+}
+//相似 mv
+const simiMv = ({id})=>{
+    return api.get(`/simi/mv?mvid=${id}`)
 }
 export{
     Phonelogoin,
@@ -241,4 +249,6 @@ export{
     simiArtist,
     simiMv,
     simiSong,
+    mvDetail,
+    mvUrl,
 }

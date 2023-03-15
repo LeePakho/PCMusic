@@ -54,6 +54,7 @@ export default{
         }
 
         const ended = ()=>{
+            proxy.$bus.emit("ended")
             store.commit("setIsPlay",false)
             if(info.playMode === 1){
                 startSong()

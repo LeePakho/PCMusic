@@ -83,7 +83,7 @@ import ReplyComment from '@/components/ReplyComment.vue'
 export default {
   components: { ReplyComment },
     props:{
-        type:Number,
+        type:Number,// 0: 歌曲 1: mv 2: 歌单 3: 专辑  4: 视频
         id:Number,
     },
     setup(props){
@@ -104,10 +104,11 @@ export default {
         const store = useStore()
         const { proxy } = getCurrentInstance()
         const userInfo = computed(()=>store.getters.userInfo)
+
         const getcommenttype = ()=>{
             info.isLoding = true
             switch(props.type){
-                case 0 : info.commenttype = "commentMusic"; break;
+                case 0 : info.commenttype = "commentMusic";break;
                 case 1 : info.commenttype = "commentMv"; break;
                 case 2 : info.commenttype = "commentPlaylist"; break;
                 case 3 : info.commenttype = "commentAlbum"; break;
@@ -150,7 +151,7 @@ export default {
             commentHandler(2,msg,info.replyCommentId)
         }
         //评论
-        const commentHandler = async(t,content,commentId)=>{
+        const commentHandler = async(t,content,commentId=0)=>{
             const params = {
                 t,
                 type:props.type,
@@ -159,15 +160,16 @@ export default {
                 commentId,
             }
             const {data} = await proxy.$http.comment(params)
+            console.log(data)
             if(data.code !== 200){
-                return props.$msg.error("请求失败");
+                return proxy.$msg.error("请求失败");
             }
             getcommenttype()
             switch(t){
-                case 0:props.$msg.success("删除成功");break
-                case 1:props.$msg.success("发送成功");break
+                case 0:proxy.$msg.success("删除成功");break
+                case 1:proxy.$msg.success("发送成功");break
                 case 2:
-                    props.$msg.success("回复成功");
+                    proxy.$msg.success("回复成功");
                     info.isreply=false;
                     info.replyCommentId = 0
                     break
@@ -185,25 +187,21 @@ export default {
             info.onreply = true
         }
 
-        const windosOn = ()=>{
-            window.addEventListener('click',()=>{
-                if(info.isreply && !info.onreply){
-                    console.log("111")
-                    changereply()
-                }
-                info.onreply = false
-            })
+        const Listener = ()=>{
+            if(info.isreply && !info.onreply){
+                changereply()
+            }
+            info.onreply = false
         }
 
-        let replychange = windosOn()
-
         onBeforeMount(()=>{
-            replychange = null
+            window.removeEventListener("click",Listener())
         })
 
         onMounted(()=>{
             getcommenttype()
-            replychange
+            
+            window.addEventListener('click',Listener())
         })
 
         return{

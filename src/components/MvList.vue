@@ -19,7 +19,7 @@
             <div class="item" v-for="item in mvList" :key="item.id">
                 <div class="mvlist-image" @click="jumpMv(item.id)">
                     <i class="iconfont icon-video-play"></i>
-                    <el-image :src="item.cover" @click="jumpMv(item.id)"></el-image>
+                    <el-image :src="item.cover"></el-image>
                 </div>
                 <div class="mvlist-info">
                     <div class="name">{{item.name}}</div>
@@ -40,7 +40,7 @@ export default {
     },setup(){
         const router = useRouter()
         const jumpMv = id=>{
-            router.push({path:'/mv',query:{id}})
+            router.push({path:'/mvlist/mv',query:{id}})
         }
         return{
             jumpMv,
