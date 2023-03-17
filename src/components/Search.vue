@@ -34,6 +34,7 @@
                 v-for="val in searchInfo[`${item}`]"
                 :key="val.id"
                 :value="val.name"
+                @click="jumpOther(item,val.id)"
             />
         </el-option-group>
       </el-select>
@@ -106,6 +107,7 @@ export default {
                 });
             }
                 info.loading = false
+                console.log(info.order)
         }
         //调用热门搜索
         onMounted(()=>getSearchHot())
@@ -118,6 +120,10 @@ export default {
             }
             router.push({path: '/cloudsearch' ,query: {keywords:item.first}})
         }
+        //跳转其他
+        const jumpOther = (item,id)=>{
+            router.push({name:item,query:{id}})
+        }
 
         return{
             ...toRefs(info),
@@ -125,6 +131,7 @@ export default {
             handleFocus,
             onClear,
             jumpCloudsearch,
+            jumpOther,
         }
     }
 }

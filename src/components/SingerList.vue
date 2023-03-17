@@ -43,7 +43,7 @@ export default {
         const {proxy} = getCurrentInstance()
         const router = useRouter()
         const jumpSinger = id =>{
-            router.push({path:'/singer',query:{id:id}})
+            router.push({path:'/artist/singer',query:{id:id}})
         }
         const linmitByte =(str,num)=>{
             return proxy.$utils.linmitByte(str,num)

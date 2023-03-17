@@ -202,6 +202,22 @@ const mvUrl = ({id})=>{
 const simiMv = ({id})=>{
     return api.get(`/simi/mv?mvid=${id}`)
 }
+//获取歌手详情
+const artistDetail = ({id})=>{
+    return api.get(`/artist/detail?id=${id}`)
+}
+//获取歌手描述
+const artistDesc = ({id})=>{
+    return api.get(`/artist/desc?id=${id}`)
+}
+//获取歌手 mv
+const artistMv = ({id})=>{
+    return api.get(`/artist/mv?id=${id}`)
+}
+//获取歌手单曲
+const artists = ({id})=>{
+    return api.get(`/artists?id=${id}`)
+}
 export{
     Phonelogoin,
     searchHot,
@@ -251,4 +267,8 @@ export{
     simiSong,
     mvDetail,
     mvUrl,
+    artistDetail,
+    artistDesc,
+    artistMv,
+    artists,
 }

@@ -1,7 +1,7 @@
 <template>
   <el-carousel :interval="5000" arrow='never' indicator-position="outside" height="360px">
     <el-carousel-item class="box" v-for="(list,index) in info.lists" :key="index">
-      <router-link class="item" :to="{path:'/singer',query:{id:item.id}}" v-for="item in list" :key="item.id">
+      <router-link class="item" :to="{path:'/artist/singer',query:{id:item.id}}" v-for="item in list" :key="item.id">
         <el-image :src="item.picUrl"></el-image>
       </router-link>
     </el-carousel-item>

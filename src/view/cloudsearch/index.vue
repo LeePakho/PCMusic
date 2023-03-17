@@ -163,7 +163,7 @@
     width: 70%;
     position: relative;
     background-color: #fff;
-    border-radius: 0 0 20px 20px;
+    border-radius: 20px 20px 20px 20px;
     min-height: 700px;
 }
 .search-tab{

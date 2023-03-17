@@ -63,6 +63,7 @@ import { useRoute } from 'vue-router'
 import 'vue3-video-play/dist/style.css'
 import { videoPlay } from 'vue3-video-play'
 import Comments from '@/components/Comments'
+import { useStore } from 'vuex'
 export default {
   components:{
     videoPlay,
@@ -72,6 +73,7 @@ export default {
     
     const { proxy } = getCurrentInstance()
     const route = useRoute()
+    const store = useStore()
 
     const info = reactive({
       id:route.query.id,
@@ -113,6 +115,7 @@ export default {
       getmvdetail()
       getmvurl()
       getsimimv()
+      store.commit("setIsPlay",false)
     })
 
     return{

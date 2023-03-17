@@ -19,7 +19,7 @@
             <div class="item" v-for="item in mvList" :key="item.id">
                 <div class="mvlist-image" @click="jumpMv(item.id)">
                     <i class="iconfont icon-video-play"></i>
-                    <el-image :src="item.cover"></el-image>
+                    <el-image :src="item.cover || item.imgurl"></el-image>
                 </div>
                 <div class="mvlist-info">
                     <div class="name">{{item.name}}</div>
@@ -69,7 +69,7 @@ export default {
         display: block;
         position: relative;
         width: 100%;
-        height: 123px;
+        height: 130px;
         overflow: hidden;
         &:hover{
             
@@ -137,73 +137,6 @@ export default {
     }
 }
 
-
-/** 
-.mv{
-    display: flex;
-    flex-wrap: wrap;
-    .item{
-        flex: 16%;
-        max-width: calc(100% / 6 - 10px);
-        margin:0 10px 10px 0;
-        .mv-info{
-            margin-top: calc(100 / 24);
-            font-size: 80%;
-        }
-        .mv-image{
-            position: relative;
-            width: 100%;
-            height: 90px;
-            overflow: hidden;
-            cursor: pointer;
-            .el-image{
-                transition: all .5s linear;
-                -webkit-transition: all .5s linear;
-            }
-            i{
-                color: #fff;
-                display: block;
-                position: absolute;
-                z-index: 1;
-                top: 45%;
-                left: calc(100% / 2 - 8px);
-                opacity: 0;
-                transition: all .5s linear;
-                -webkit-transition: all .5s linear;
-            }
-            &:hover{
-                .el-image{
-                    transform: scale(1.2);
-                }
-                i{
-                    opacity: 1;
-                    transform: scale(3.5);
-                }
-            }
-        }
-    }
-    .name,.duration{
-        color: var(--color-text-main);
-    }
-    .artistName{
-        color: var(--color-text);
-    }
-    .duration{
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: start;
-        align-items: center;
-        i{
-            display: block;
-        }
-        span{
-            display: block;
-            margin-left: calc(100% / 24);
-        }
-    }
-}
-*/
 .el-skeleton{
     width: 100%;
     display: flex;
