@@ -28,6 +28,8 @@
   const loginDialog = ()=>store.commit('setloginDialog',true)
   //退出登录
   const logout = async()=>{
+    window.localStorage.removeItem("cookie")
+    window.localStorage.removeItem("playList")
     window.localStorage.setItem('isLogin',false)
     store.commit('setisLogin',false)
     await proxy.$http.loginOut()

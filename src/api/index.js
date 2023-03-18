@@ -24,8 +24,8 @@ const logincheck = ({key = '',timerstamp = ''})=>{
     return api.get(`/login/qr/check?key=${key}&timerstamp=${timerstamp}`,{})
 }
 //cookie更新状态
-const loginStatus = ({timerstamp,cookie='',realIP='116.25.146.177'}) =>{
-    return api.post(`/login/status?timerstamp=${timerstamp}&realIP=${realIP}`,{cookie})
+const loginStatus = ({timerstamp,cookie='',token="",realIP='116.25.146.177'}) =>{
+    return api.post(`/login/status?timerstamp=${timerstamp}&realIP=${realIP}`,{cookie,token})
 }
 //退出登录
 const loginOut = ()=>{
