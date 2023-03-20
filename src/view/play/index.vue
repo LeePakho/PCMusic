@@ -28,7 +28,7 @@
           <span :class="{'active':info.params.order == 'new'}" @click="changeType('new')">最新</span>
         </div>
       </div>
-      <play-list :sheetList='info.sheetList'></play-list>
+      <play-list :sheetList='info.sheetList' :loading="info.loading"></play-list>
       <el-backtop :bottom="100" :visibilityHeight="600">
         <div
           style="
@@ -66,7 +66,8 @@ const info = reactive({
     cat:'',
     limit:30,
     offset:0,
-  }
+  },
+  loading:true
 })
 
 const { proxy } = getCurrentInstance()
@@ -99,6 +100,7 @@ const changeSelect = (item,index=-1)=> {
 const getlist = async(params)=>{
   const {data:res} = await proxy.$http.playList(params)
   info.sheetList = info.params.offset !==0 ? [...info.sheetList,...res.playlists] : res.playlists
+  info.loading=false
 }
 
 const changeType = type => {

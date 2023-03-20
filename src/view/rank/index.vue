@@ -5,6 +5,7 @@
       :playlist="playlist" 
       :list="list" 
       :total="total"
+      :loading="loading"
     ></detail>
     <div class="rank-aside">
       <div class="aside-menu">
@@ -50,6 +51,7 @@ export default {
       page:1,
       list:[],
       playlist:{},
+      loading:true
     })
 
     const getListDetail = async ()=>{
@@ -61,6 +63,7 @@ export default {
       info['listFeature'] = res.list.filter(item=> !item.ToplistType && item.name.indexOf("云音乐")>=0 )
       info['listOther'] = res.list.filter(item=> !item.ToplistType && item.name.indexOf("云音乐")<0 )
       info.rid = info[`list${info.type}`][info.listIndex].id
+      info.loading = false
     }
 
     const formatTime = time =>{

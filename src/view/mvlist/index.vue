@@ -1,7 +1,7 @@
 <template>
   <div class="mvlist">
     <div class="list">
-      <mv-list :mvList='info.mvlist' ref="myScrollbar"></mv-list>
+      <mv-list :mvList='info.mvlist' ref="myScrollbar" :loading='info.loading'></mv-list>
     </div>
     <div class="mv-aside">
       <el-affix target=".mv-aside" :offset="140">
@@ -52,6 +52,7 @@ const info = reactive({
     limit:36,
     offset:0,
   },
+  loading:true
 })
 
 const getmvlist = async (params)=>{
@@ -65,6 +66,7 @@ const getmvlist = async (params)=>{
     info.params.offset+=info.params.limit
   }
   info.mvlist = [...info.mvlist,...res.data]
+  info.loading = false
 }
 
 const roll = () =>{
@@ -114,6 +116,7 @@ onBeforeUnmount(()=>scroll=null)
 .mvlist{
   display: flex;
   flex-direction: row;
+  gap:1rem;
   .list{
     flex: 7;
   }

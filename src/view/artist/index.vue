@@ -1,6 +1,6 @@
 <template>
     <div class="sheetlist">
-        <singer-list class="singer" :SingerList='info.sheetlist'></singer-list>
+        <singer-list class="singer" :SingerList='info.sheetlist' :loading="info.loading"></singer-list>
         <div class="aside">
           <el-affix target=".aside" :offset="140">
             <div class="asidemain">
@@ -39,7 +39,8 @@ const info = reactive({
         initial:-1,
         type:-1,
         area:-1,
-    }   
+    },
+    loading:true
 })
 
 const changParams = (label,val) =>{
@@ -65,6 +66,7 @@ const getlist = async (params) =>{
       return proxy.$msg.error("请求失败")
     }
     info.sheetlist = [...info.sheetlist,...res.artists]
+    info.loading = false
 }
 
 const roll = () =>{
