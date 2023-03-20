@@ -37,7 +37,7 @@
             <el-button round><i class="iconfont icon-collect"></i> 收藏</el-button>
           </div>
         </div>
-        <songs-list :limit="limit" :offset="page - 1" :songList="list.slice((page - 1) * limit , page * limit)"></songs-list>
+        <songs-list :limit="limit" :offset="page - 1" :songList="list.slice((page - 1) * limit , page * limit)" :loading='loading'></songs-list>
 
         <div v-if="total>limit">
           <el-pagination
@@ -86,6 +86,7 @@ export default {
             page:1,
             total:0,
             type: 3, // 0: 歌曲 1: mv 2: 歌单 3: 专辑  4: 视频
+            loading:true
         })
 
 
@@ -118,7 +119,7 @@ export default {
                 }
             })
             info.total = info.list.length
-
+            info.loading = false
         }
         //版权
         const islicense = async (id,index) =>{

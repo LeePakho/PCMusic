@@ -84,6 +84,9 @@ import playlistmv from '@/assets/js/new_mv'
     }
   }
 
+  .toplist{
+    margin-bottom: 40px;
+  }
 
   .all,.dj,.artist{
     background-color: #FFF;

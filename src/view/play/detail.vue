@@ -6,6 +6,7 @@
       :total="total"
       :list="list"
       :playlist="playlist"
+      :loading="loading"
     ></detall>
     <div class="aside">
       <div class="recommend"  v-if="related.length>0">
@@ -65,6 +66,7 @@ export default {
       playlist:{},
       related:[],
       hotComments:[],
+      loading:true
     })
     
     const getlist = async()=>{
@@ -90,6 +92,7 @@ export default {
         }
       })
       info.total = data.privileges.length
+      info.loading = false
     }
 
     const skip = id =>{

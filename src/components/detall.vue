@@ -34,7 +34,7 @@
             <el-button round><i class="iconfont icon-collect"></i> 收藏</el-button>
           </div>
         </div>
-        <songs-list :limit="limit" :offset="page - 1" :songList="list.slice((page - 1) * limit , page * limit)"></songs-list>
+        <songs-list :limit="limit" :offset="page - 1" :songList="list.slice((page - 1) * limit , page * limit)" :loading='loading'></songs-list>
 
         <div class="PlayLogin" v-if="isPlayLogin" @click="onpeLogin">登录后查看全部歌曲</div>
 
@@ -79,6 +79,10 @@ export default {
     total:{
         type:Number,
         default:0
+    },
+    loading:{
+      type:Boolean,
+      default:true,
     }
   },
   setup(props){

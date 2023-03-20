@@ -8,7 +8,7 @@
             </li>
         </ul>
 
-        <a class="address" href="https://github.com/LeePakho/PCMusic" target="_blank">githun地址</a>
+        <a class="address" href="https://github.com/LeePakho/PCMusic" target="_blank">github地址</a>
     </div>
 </template>
 

@@ -142,6 +142,9 @@ export default {
         }
         //回复
         const replycomment = (commentId)=>{
+            if(!store.getters.isLogin){
+                return store.commit("setloginDialog",true)
+            }
             info.isreply = true
             info.replyCommentId = commentId
             changeonreply()

@@ -1,5 +1,5 @@
 <template>
-    <el-skeleton :loading="!info.songList.length" animated :count="4">
+    <el-skeleton :loading="info.loading" animated :count="4">
     <template #template>
         <div class="ske-item">
             <el-skeleton-item variant="h3" style="width: 40%;display: block;" />
@@ -43,7 +43,8 @@ import { useRouter } from "vue-router"
         topList:[],
         songList: {},
         limit:6,
-        num:6
+        num:6,
+        loading:true,
     })
 
     const {proxy} = getCurrentInstance()
@@ -75,6 +76,7 @@ import { useRouter } from "vue-router"
                 }
             })
         })
+        info.loading = false
     }
 
     const getUpData = publishTime =>{
