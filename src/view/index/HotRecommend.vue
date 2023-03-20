@@ -1,6 +1,6 @@
 <template>
   <el-skeleton
-        :loading="!playList"
+        :loading="loading"
         animated
         :throttle="500"
         :count="6"
@@ -42,7 +42,11 @@
 <script>
     export default{
         props:{
-            playList:Array
+            playList:Array,
+            loading:{
+                type:Boolean,
+                default:true,
+            }
         }
     }
 </script>

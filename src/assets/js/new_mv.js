@@ -9,7 +9,8 @@ export default function playlistmv(){
         mvIndex:0,
         limit:12,
         mvType:['全部','内地','港台','欧美','日本','韩国'],
-        area:''
+        area:'',
+        loading:true,
     })
 
     const getmv = async()=>{
@@ -18,6 +19,7 @@ export default function playlistmv(){
             return proxy.$msg.error("请求失败");
         }
         mv_info.mvList = res.data
+        mv_info.loading = false
     }
 
     const changeMvIndex = index =>{

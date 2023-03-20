@@ -54,17 +54,19 @@ import { useStore } from 'vuex';
     }
 
     const countDown = ()=>{
-        var time = 60
-        isSend.value = true 
-        var timer = setInterval(()=>{
-            if(time>0){
-                send_out.value = --time
-            }else{
-                send_out.value = "重新发送"
-                isSend.value = false 
-                clearInterval(timer)
-            }
-        },400)
+        new Promise(()=>{
+            var time = 60
+            isSend.value = true 
+            var timer = setInterval(()=>{
+                if(time>0){
+                    send_out.value = --time
+                }else{
+                    send_out.value = "重新发送"
+                    isSend.value = false 
+                    clearInterval(timer)
+                }
+            },1000)
+        })
     }
 
     const isQRlogin = ref(false)

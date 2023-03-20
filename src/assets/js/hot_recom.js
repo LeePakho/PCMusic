@@ -8,6 +8,7 @@ export default function playlisthot(){
         playListTags:[],
         playList:[],
         playListIndex:0,
+        loading:true,
         playListParams:{order:'hot',cat:'全部',limit:6},
     })
 
@@ -36,6 +37,7 @@ export default function playlisthot(){
             proxy.$msg.error("请求失败")
         }
         playListHot_info.playList = res.playlists
+        playListHot_info.loading = false
     }
 
     onMounted(()=>{

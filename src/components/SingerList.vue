@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-skeleton :loading="!SingerList" animated :count="15">
+    <el-skeleton :loading="loading" animated :count="15">
       <template #template>
         <div class="skeleton-item">
             <el-skeleton-item class="image" variant="image"/>
@@ -37,7 +37,11 @@ import { getCurrentInstance } from '@vue/runtime-core'
 import { useRouter } from 'vue-router'
 export default {
     props:{
-        SingerList:Array
+        SingerList:Array,
+        loading:{
+                type:Boolean,
+                default:true,
+            }
     },
     setup(){
         const {proxy} = getCurrentInstance()

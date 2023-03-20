@@ -8,7 +8,7 @@
           <div class="txt-item" :class="{'active':playListHot_info.playListIndex === index}" @click="changePlayListIndex(index)" v-for="(tags,index) in playListHot_info.playListTags" :key="index">{{tags.name}}</div>
         </div>
       </div>
-      <hot-recommend :playList='playListHot_info.playList'></hot-recommend>
+      <hot-recommend :playList='playListHot_info.playList' :loading='playListHot_info.loading'></hot-recommend>
     </div>
     <div class="album all">
       <div class="info">
@@ -17,7 +17,7 @@
           <div class="txt-item" :class="{'active':new_album_info.albumIndex === index}" @click="changeAlbumIndex(index)" v-for="(tags,index) in new_album_info.albumType" :key="index">{{tags.name}}</div>
         </div>
       </div>
-      <album-list :albumList='new_album_info.albumList'></album-list>
+      <album-list :albumList='new_album_info.albumList' :loading='new_album_info.loading'></album-list>
     </div>
     <div class="toplist">
       <ran-list></ran-list>
@@ -29,7 +29,7 @@
           <div class="txt-item" :class="{'active':mv_info.mvIndex === index}" @click="changeMvIndex(index)" v-for="(tags,index) in mv_info.mvType" :key="index">{{tags}}</div>
         </div>
       </div>
-      <mv-list :mvList="mv_info.mvList"></mv-list>
+      <mv-list :mvList="mv_info.mvList" :loading='mv_info.loading'></mv-list>
     </div>
     <div class="dj-artist">
       <div class="dj">

@@ -1,5 +1,5 @@
 <template>
-  <el-skeleton :loading="albumList.length==0" animated :count="12">
+  <el-skeleton :loading="loading" animated :count="12">
       <template #template>
         <div class="ke-item">
             <el-skeleton-item variant="image" class="ske-img" />
@@ -14,7 +14,7 @@
         <div class="album">
             <div class="item" v-for="(item,index) in albumList" :key="index" @click="jumpAlbum(item.albumId)">
                 <div class="album-img">
-                    <el-image :src="item.picUrl" lazy></el-image>
+                    <el-image :src="item.picUrl"></el-image>
                 </div>
                 <div class="info">
                     <div class="album-type">{{ item.type }}</div>
@@ -31,7 +31,11 @@
 import { useRouter } from 'vue-router'
 export default {
     props:{
-        albumList:Array
+        albumList:Array,
+        loading:{
+            type:Boolean,
+            default:true
+        }
     },
     setup(){
         const router = useRouter()
@@ -46,6 +50,31 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
+
+.album-img{
+    flex: 2;
+    border-radius: 4px;
+    height: 100%;
+    position: relative;
+    &::after{
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background: url('@/assets/img/disc.png') no-repeat;
+        background-size: contain;
+        top: 0;
+        right: -20px;
+        transition: all .5s linear;
+    }
+    &:hover{
+        &::after{
+            transform: rotate(50deg);
+            right: -30px;
+        }
+    }
+}
 
 .album{
     display: flex;
@@ -64,29 +93,6 @@ export default {
         background: #f0f0f0;
         overflow: hidden;
         cursor: pointer;
-        .album-img{
-            flex: 2;
-            border-radius: 4px;
-            height: 100%;
-            position: relative;
-            &::after{
-                position: absolute;
-                content: "";
-                width: 100%;
-                height: 100%;
-                background: url('@/assets/img/disc.png') no-repeat;
-                background-size: contain;
-                top: 0;
-                right: -20px;
-                transition: all .5s linear;
-            }
-            &:hover{
-                &::after{
-                    transform: rotate(50deg);
-                    right: -30px;
-                }
-            }
-        }
         .info{
             flex: 3;
             position: relative;

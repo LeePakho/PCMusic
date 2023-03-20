@@ -1,7 +1,7 @@
 <template>
   <div class="banner">
     <el-skeleton
-      :loading="!info.bannerList"
+      :loading="!info.bannerList.length"
       animated
     >
       <template #template>

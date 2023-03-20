@@ -1,6 +1,6 @@
 <template>
      <el-skeleton
-      :loading="sheetList.length == 0"
+      :loading="loading"
       animated
       :count="18"
     >
@@ -18,7 +18,7 @@
         <div class="play">
             <div class="item" v-for="item in sheetList" :key="item.id">
                 <div class="play-image">
-                    <el-image :src="item.coverImgUrl" lazy @click="jumpSheet(item.id)"></el-image>
+                    <el-image :src="item.coverImgUrl" @click="jumpSheet(item.id)"></el-image>
                     <div class="play-hear">
                         <i class="iconfont icon-playnum"></i><div>{{calculationNum(item.playCount)}}/{{item.trackCount}}首</div>
                     </div>
@@ -40,7 +40,11 @@ import { getCurrentInstance } from '@vue/runtime-core'
 import { useRouter } from 'vue-router'
 export default {
     props:{
-        sheetList:Array
+        sheetList:Array,
+        loading:{
+                type:Boolean,
+                default:true,
+            }
     },
     setup(){
         const {proxy} = getCurrentInstance()

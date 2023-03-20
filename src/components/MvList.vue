@@ -1,6 +1,6 @@
 <template>
   <el-skeleton
-      :loading="mvList.length == 0"
+      :loading="loading"
       animated
       :count="25"
     >
@@ -36,7 +36,11 @@
 import { useRouter } from 'vue-router'
 export default {
     props:{
-        mvList:Array
+        mvList:Array,
+        loading:{
+            type:Boolean,
+            default:true
+        }
     },setup(){
         const router = useRouter()
         const jumpMv = id=>{

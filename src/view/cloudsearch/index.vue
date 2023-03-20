@@ -7,11 +7,11 @@
             </div>
         </div>
         <div class="list" >
-            <songs-list v-if="info.type==1" :limit="info.limit" :offset="info.offset" :songList="info.songList"></songs-list>
-            <album-list v-if="info.type==10" :albumList="info.albumList"></album-list>
-            <singer-list  v-if="info.type==100" :SingerList='info.SingerList'></singer-list>
-            <play-list v-if="info.type==1000" :sheetList='info.sheetList'></play-list>
-            <mv-list v-if="info.type==1004" :mvList='info.mvList'></mv-list>
+            <songs-list v-if="info.type==1" :limit="info.limit" :offset="info.offset" :songList="info.songList" :loading='info.loading'></songs-list>
+            <album-list v-if="info.type==10" :albumList="info.albumList" :loading='info.loading'></album-list>
+            <singer-list  v-if="info.type==100" :SingerList='info.SingerList' :loading='info.loading'></singer-list>
+            <play-list v-if="info.type==1000" :sheetList='info.sheetList' :loading='info.loading'></play-list>
+            <mv-list v-if="info.type==1004" :mvList='info.mvList' :loading='info.loading'></mv-list>
         </div>
         <el-pagination
             v-show="ispagination"

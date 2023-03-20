@@ -1,5 +1,5 @@
 <template>
-    <div class="song-box">
+    <div class="song-box" v-if="!loading">
         <el-row class="song-title">
             <el-col class="song-index" :span="2">序号</el-col>
             <el-col class="song-text" :span="8">音乐标题</el-col>
@@ -43,6 +43,10 @@ export default{
         songList:Array,
         limit:Number,
         offset:Number,
+        loading:{
+            type:Boolean,
+            default:true
+        }
     },setup(props){
         // const {proxy} = getCurrentInstance()
         const store = useStore()
